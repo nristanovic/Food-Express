@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form #f="ngForm" (ngSubmit)="save(f.value)">
+                <div class="form-group">
+                    <label for="title">Ime proizvoda</label>
+                    <input #title="ngModel" [(ngModel)]="product.title" name="title" id="title" type="text"
+                        class="form-control" required>
+                    <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+                        Neophodno je izabrati ime proizvoda
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price">Cena</label>
+                    <div class="input-group">
+                        <input #price="ngModel" [(ngModel)]="product.price" name="price" id="price" type="number"
+                            class="form-control" required [min]="1">
+                        <span class="input-group-text">.00</span>
+                        <span class="input-group-text">RSD</span>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
+                        <div *ngIf="price.errors.required">Neophodno je uneti cenu</div>
+                        <div *ngIf="price.errors.min">Neophodno je da cena bude veća od 0 dinara!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="category">Kategorije</label>
+                    <select #category="ngModel" [(ngModel)]="product.category" name="category" id="category"
+                        class="form-control" required>
+                        <option value=""></option>
+                        <option *ngFor="let c of categories$ | async" [value]="c.key">
+                            {{c.name}}
+                        </option>
+                    </select>
+                    <div class="alert alert-danger" *ngIf="category.touched && category.invalid">
+                        Neophodno  je uneti kategoriju
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="imageUrl">Link slike</label>
+                    <input #imageUrl="ngModel" [(ngModel)]="product.imageUrl" name="imageUrl" id="imageUrl" type="text"
+                        class="form-control" required url>
+                    <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
+                        <div *ngIf="imageUrl.errors.required">Neophodno je uneti link slike</div>
+                        <div *ngIf="imageUrl.errors.url">Unet je neispravan link slike!</div>
+                    </div>
+                </div>
+                <button [disabled]="!f.valid" class="btn btn-primary icon-button">Sačuvaj</button>
+                <button type="button" (click)="delete()" class="btn btn-warning float-right icon-button">Izbriši</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div *ngIf="product.title || product.imageUrl" class="card" style="width: 18rem;">
+                <img [src]="product.imageUrl" class="card-img-top" *ngIf="product.imageUrl">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.title}}</h5>
+                    <p class="card-text">{{ product.price | currency:'RSD ' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

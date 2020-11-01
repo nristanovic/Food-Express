@@ -1,0 +1,16 @@
+.container{
+    margin-top: 60px;
+}
+.icon{
+    background-image: url(/assets/images/food-express.png);
+    width: 500px;
+    height: 400px;
+    content: "";
+    background-size: 700px; 
+    margin-top: 0;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat; 
+
+}
+

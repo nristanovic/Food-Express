@@ -1,0 +1,139 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~font-awesome/css/font-awesome.css';
+
+ $primary-color: #ec3434;
+$primary-color-hover: #eb4444; 
+
+body {
+    padding-top: 60px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+
+
+/* ngb-carousel {
+    
+    margin: 0 auto 20px auto;
+    max-height: auto;
+    
+}
+
+ngb-carousel img {
+    
+    height: 450px;
+    outline: none;
+    object-fit: cover;
+    float: left;
+    
+}
+
+ngb-carousel {
+    width: inherit;
+    height: inherit;
+} */
+/* .carousel-control-next-icon {
+   
+} */
+
+.carousel-inner {
+    overflow: visible;
+}
+
+.carousel-item {
+    display: flex !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.2s ease-in-out, visibility 1.2s;
+    z-index: -1;
+}
+
+.carousel-item.active{
+    opacity: 1;
+    visibility: visible;
+    z-index: 10;
+}
+
+.carousel-control-prev {
+    
+     z-index: 20;
+}
+
+.carousel-control-next {
+     z-index: 20;
+} 
+
+.carousel-indicators{
+    z-index: 20;
+} 
+
+
+
+h1, h2, h3 { 
+    margin-bottom: 1.5rem;
+  }
+
+.navbar { 
+border-bottom: 3px solid $primary-color;
+height: 60px;
+background-color: #ffc10d;
+font-weight: 700;
+}
+
+.navbar-light .navbar-brand {
+    color: $primary-color;
+}
+
+.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
+    color: $primary-color-hover;
+  }
+
+.list-group-item.active {
+    background-color: $primary-color;
+    border-color: $primary-color;
+}
+
+.btn-primary {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+.btn-primary:hover {
+    background-color: $primary-color-hover;
+    border-color: $primary-color-hover;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    background-color: $primary-color;
+    border-color: $primary-color;
+}
+
+.form-control:focus {
+    border-color: $primary-color;
+}
+
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: $primary-color !important;
+    border-color: $primary-color !important;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+   
+    background-color: $primary-color-hover;
+
+}
+
+.border-info {
+    border: none !important;
+}
+
+.badge-danger{
+    background-color: $primary-color !important;
+}
+.btn-warning{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    font-weight: 500 !important;
+}

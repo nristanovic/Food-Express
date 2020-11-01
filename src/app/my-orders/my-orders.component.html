@@ -1,0 +1,88 @@
+<div class="container">
+  <h1 class="text-center">Informacije o profilu</h1>
+  <table class="table  table-bordered ">
+    <thead class="thead-dark">
+      <tr class="text-center">
+        <th>Ime i Prezime</th>
+        <th>Broj telefona</th>
+        <th>E-mail</th>
+        <th>Izbriši nalog</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="tr-profile text-center">
+        <td>{{currentUserName}}</td>
+        <td>
+          <form #f="ngForm" class="form" id="phoneNumber">
+            <div class="form-group">
+              <input type="text" class="form-control mb-2" placeholder="broj telefona" name="phoneNumber"
+                #phoneNumber="ngModel" [(ngModel)]="appUser$.phoneNumber" [pattern]="mobNumberPattern" required>
+              <div class="alert alert-danger" *ngIf="phoneNumber.touched && phoneNumber.invalid"
+                style="font-size:small;">
+                <div *ngIf="phoneNumber.errors.required">Neophodno je uneti broj telefona.</div>
+                <div *ngIf="phoneNumber.errors.pattern"> Broj telefona nije pravilno unet. </div>
+              </div>
+            </div>
+
+            <button class="btn btn-sm btn-primary btn-block mb-1" [disabled]="!f.value"
+              (click)="update()">Sačuvaj</button>
+          </form>
+        </td>
+        <td>
+          {{ currentUserEmail}}
+        </td>
+        <td>
+          <button class="btn btn-sm btn-warning btn-block mb-1" id="button" (click)="delete()">Obriši</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+  <h2 class="text-center">Porudžbine</h2>
+  <table class="table table-hover table-striped">
+    <thead class="thead-dark">
+      <tr class="text-center">
+        <th>Naručilac</th>
+        <th>Datum</th>
+        <th>Adresa</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of order$ | async" class="text-center">
+        <td>{{ order.shipping.name }}</td>
+        <td>{{ order.datePlaced | date}}</td>
+        <td>{{ order.shipping.addressLine1 + ','}} {{ order.shipping.city }}</td>
+        <td>
+          <a [routerLink]="['/my/profile/' + order.map]">Pregled</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+  <h3 class="text-center">Omiljeni proizvodi</h3>
+  <table class="table table-hover table-striped table-sm">
+    <thead class="thead-dark">
+      <tr class="text-center">
+        <th>Proizvod</th>
+        <th>Vaša ocena</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let star of stars$ | async" class="text-center">
+        <td>{{ star.productTitle }}</td>
+        <td>{{ star.value }}</td>
+        <td><img [src]="star.imageUrl" id="img" alt="Responsive image"></td>
+        <td>
+          <a routerLink="{{star.path}}">Poruči</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

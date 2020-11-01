@@ -1,0 +1,44 @@
+<div class="container">
+    <p class="icon-set-one">
+        <a routerLink="/admin/products/new" class="btn btn-primary icon-button">Dodaj proizvod</a>
+    </p>
+    <p class="icon-set">
+        <input
+        #query
+        (keyup)="filter(query.value)"
+        type="text" class="form-control  icon clearfix" placeholder="Pretraži...">
+    </p>
+    <data-table class="text-center"
+        [items]="items"
+        [itemCount]="itemCount"
+        (reload)="reloadItems($event)">
+    
+        <data-table-column
+            [property]="'title'"
+            [header]="'Naziv'"
+            [sortable]="true"
+            [resizable]="true"
+        >
+        </data-table-column>
+    
+        <data-table-column
+            [property]="'imageUrl'"
+            [header]="'Restoran'"
+            [resizable]="true"
+        >
+       
+        <ng-template #dataTableCell let-item="item">
+            <img [src]="item.imageUrl" class="img-thumbnail img-fluid mx-auto d-block" alt="Responsive image">
+        </ng-template>
+        </data-table-column>
+    
+        <data-table-column
+            [property]="'key'"
+        >
+        <ng-template #dataTableCell let-item="item">
+                <a [routerLink]="['/products/' + item.key ]">Proizvodi</a>
+        </ng-template>
+        </data-table-column>
+    
+    </data-table>
+</div>

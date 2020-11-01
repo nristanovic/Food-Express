@@ -1,0 +1,29 @@
+<div class="row">
+    <div class=" col-7 float-left text-center">
+        <h6>Ocenite</h6>
+
+        <span class="star-rating">
+            <input type="radio" name="rating" (click)="starHandler(1)" value="1"><i></i>
+            <input type="radio" name="rating" (click)="starHandler(2)" value="2"><i></i>
+            <input type="radio" name="rating" (click)="starHandler(3)" value="3"><i></i>
+            <input type="radio" name="rating" (click)="starHandler(4)" value="4"><i></i>
+            <input type="radio" name="rating" (click)="starHandler(5)" value="5"><i></i>
+        </span>
+    </div>
+    <div class=" col-5 float-right text-center">
+        <h6>Prosečna ocena</h6>
+        <i class="fa fa-star"></i>
+       <p style="font-weight: 500; margin-bottom: 0;" > {{ avgRating$ | async }}</p>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- <h3>Reviews</h3>
+<div *ngFor="let star of stars$ | async">
+    {{ star.userId }} gave {{ star.productId }} {{ star.value }} stars
+</div> -->

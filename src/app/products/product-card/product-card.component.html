@@ -1,0 +1,27 @@
+<div *ngIf="product.title" class="card bg-light">
+    <img *ngIf="product.imageUrl" src="{{ product.imageUrl }}" class="card-img-top" alt="...">
+    <div class="card-title" *ngIf="product.key">
+        <div class="container">
+            <h5 class="card-title float-left">{{ product.title }}</h5>
+            <p class="card-text float-right">{{ product.price | currency:'RSD ' }}</p>
+        </div>
+    </div>
+    <!-- <p class="card-text" id="text2"> -->
+
+
+    <!-- </p> -->
+
+    <div class="card-body">
+        <div>
+            <star-review [product]="product" [userId]="userId" [path]="path"></star-review>
+        </div>
+    </div>
+    <div *ngIf="showActions && shoppingCart" class="card-footer">
+        <button *ngIf="shoppingCart.getQuantity(product) === 0; else updateQuantity" (click)="addToCart()"
+            class="btn btn-primary btn-block">Dodajte u Korpu</button>
+        <ng-template #updateQuantity>
+            <product-quantity [product]="product" [shopping-cart]="shoppingCart"></product-quantity>
+        </ng-template>
+    </div>
+
+</div>

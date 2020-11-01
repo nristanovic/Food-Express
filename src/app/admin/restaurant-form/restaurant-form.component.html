@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form #f="ngForm" (ngSubmit)="saveR(f.value)">
+                <div class="form-group">
+                    <label for="title">Ime</label>
+                    <input #title="ngModel" ngModel name="title" id="title" type="text" class="form-control" required>
+                    <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+                        Ime is required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="startTime && endTime">Radno vreme</label>
+                    <div class="input-group">
+                        <input #startTime="ngModel" ngModel name="startTime" id="startTime" type="time"
+                            class="form-control" required>
+                        <input #endTime="ngModel" ngModel name="endTime" id="endTime" type="time" class="form-control"
+                            required>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="startTime.touched && startTime.invalid">
+                        Pocetak radnog vremena je neophodan
+                    </div>
+                    <div class="alert alert-danger" *ngIf="endTime.touched && endTime.invalid">
+                        Kraj radnog vremena je neophodan
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="imageUrl">Link slike</label>
+                    <input #imageUrl="ngModel" ngModel name="imageUrl" id="imageUrl" type="text" class="form-control"
+                        required url>
+                    <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
+                        <div *ngIf="imageUrl.errors.required">Neophodno je uneti link slike</div>
+                        <div *ngIf="imageUrl.errors.url">Neispravan link slike!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="city">Grad</label>
+                    <input #city="ngModel" name="city" ngModel id="city" type="text" class="form-control"
+                        placeholder="Ime mesta, npr. Beograd" required>
+                    <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+                        <div *ngIf="city.errors.required">Neophodno je uneti ime mesta.</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="addressLine1">Adresa</label>
+                    <input autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search
+                        (keydown.enter)="$event.preventDefault()" #addressLine1="ngModel" name="addressLine1" ngModel
+                        id="addressLine1" type="text" class="form-control"
+                        placeholder="Ime ulice - Broj, npr. Knez Mihajlova 7" required>
+                    <div class="alert alert-danger" *ngIf="addressLine1.touched && addressLine1.invalid">
+                        <div *ngIf="addressLine1.errors.required">Neophodno je uneti adresu.</div>
+                    </div>
+
+                    <div id="google-map">
+                        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                            <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                                (dragEnd)="markerDragEnd($event)"></agm-marker>
+                        </agm-map>
+                    </div>
+
+
+                    <h6>Vaša trenutna lokacija: {{address}}</h6>
+                </div>
+                <button [disabled]="!f.valid" class="btn btn-primary icon-button">Sačuvaj</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div *ngIf="title.value || imageUrl.value" class="card" style="width: 18rem;">
+                <img [src]="imageUrl.value" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{title.value}}</h5>
+                    <p *ngIf="startTime.value || endTime.value" class="card-text">Radno veme {{startTime.value}}-{{endTime.value}}</p>
+                    <p *ngIf="addressLine1.value || city.value" class="card-text">Adresa: {{addressLine1.value + ', '}}
+                        {{ city.value }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

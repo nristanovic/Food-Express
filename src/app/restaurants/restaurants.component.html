@@ -1,0 +1,95 @@
+<div class="row">
+    <app-home></app-home>
+</div>
+
+<div class="container">
+
+
+    <p class="icon-set">
+        <ng-container >
+            <input #query (keyup)="filter(query.value)" type="text" class="form-control col-10 icon clearfix"
+            placeholder="Pretraži omiljeni restoran">
+            <button  (click)="(query.value = '') + (clear())" class="btn btn-primary icon-button col-2">Obriši</button>
+        </ng-container>
+    </p>
+        
+
+
+    <div class="row">
+
+        <ng-container *ngFor="let r of filteredRestaurants ">
+            <div class="col">
+                <div class="card" style="width: 15rem;">
+                    <a [routerLink]="['/orders/' + r.key]" class="hover-no-decoration stretched-link">
+                        <img [src]="r.imageUrl" class="card-img-top cardImage" alt="Card image cap">
+                    </a>
+                    <div class="card-body">
+                        <a [routerLink]="['/orders/' + r.key]" class="card-link text-dark stretched-link">
+                            <h5 class="card-title">{{ r.title }}</h5>
+                            <p class="card-text">Radno veme {{ r.startTime }}-{{ r.endTime }}</p>
+                            <ng-container *ngIf="r.addressLine1 || r.city" class="ng-con">
+                                <i class="fa fa-map-pin col-2"></i>
+                            
+                                <p id="p-con"  class="col-10 float-right">{{r.addressLine1 + ', '}}
+                                    {{ r.city }}</p>
+                            </ng-container>
+                        </a>
+                    </div>
+                </div>
+                <div *ngIf="(i+1) % 2 === 0" class="w-100"></div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<!-- <div class="homepage-fixed-offer col-3" data-restaurant_id="1839 ">
+    <div class="mb-5">
+        <a href="/dostava/brands/big-pizza" class="hover-no-decoration">
+            <img src="https://assets.donesi.com/cdn-cgi/image/w=268,h=168,fit=cover,q=100,f=auto/web-showcase/big-pizza.jpg"
+                alt="Big Pizza">
+        </a>
+    </div>
+    <a href="/dostava/brands/big-pizza" class="hover-no-decoration">
+        <div class="d-flex justify-content-between">
+            <h3 class="pr-5">Big Pizza</h3>
+            <span class="small flex-shrink-0"><i
+                    class="fas fa-shopping-basket mr-3 text-muted fa-sm"></i>1.340,00RSD</span>
+        </div>
+        <p class="text-muted">2x classic big pizza</p>
+    </a>
+</div>
+
+<div class="box-shadow rounded position-relative">
+    <div
+        class="address-form-component-outer d-flex align-items-center flex-column flex-lg-row bg-white pl-md-9 p-3 pl-5 rounded position-relative">
+        <div class="d-flex align-items-center w-100 address-form-component-inner">
+            <i class="fas fa-circle-notch text-muted fa-spin text-muted address-form-component-icon-loading"
+                aria-hidden="true"></i>
+            <span id="scope" class="address-form-component-scope-icon"></span>
+            <span id="friendly_name" class="address-form-component-scope-friendly-name"></span>
+            <input type="text" class="form-control address-form-component-search-input border-0 pl-2 text-truncate"
+                placeholder="Unesite vašu adresu">
+            <button type="button" class="btn btn-link address-form-component-clear-btn px-3 px-md-5 mr-md-5"><i
+                    class="fas fa-times text-muted" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-link address-form-component-geolocation-btn px-3 px-sm-5 d-lg-none"><i
+                    class="fas fa-crosshairs text-muted" aria-hidden="true"></i></button>
+            <span class="address-form-component-list-arrow px-3 pr-md-9"><i class="fas fa-angle-down"
+                    aria-hidden="true"></i></span>
+        </div>
+        <ul class="box-shadow border-top rounded-bottom list-unstyled position-absolute bg-white w-100 py-5 px-1 px-md-5 address-form-component-list"
+            style="display: none;"></ul>
+        <button type="button"
+            class="btn btn-link text-muted position-absolute m-0 mt-12 pt-5 align-self-start address-form-component-back-to-saved px-0"><i
+                class="fas fa-arrow-left mr-3" aria-hidden="true"></i><span
+                class="small font-weight-bold hover-no-decoration">Pogledajte vaše adrese</span></button>
+        <span
+            class="text-muted position-absolute m-0 mt-12 pt-5 align-self-start address-form-component-search-help small">
+            Knez Mihailova 7, Beograd </span>
+        <div class="d-none d-lg-block col-12 col-lg-auto px-0">
+            <button type="button" class="btn btn-primary btn-block btn-lg">Naručite</button>
+        </div>
+    </div>
+    <div class="position-absolute w-100 address-form-component-alert alert alert-warning border-0 rounded py-6 px-9"
+        role="alert">
+        Ime ulice - Broj - Grad, npr. Knez Mihajlova 7, Beograd </div>
+</div> -->

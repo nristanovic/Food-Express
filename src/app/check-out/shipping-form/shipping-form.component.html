@@ -1,0 +1,51 @@
+ 
+<form #f="ngForm"  >
+    <div class="form-group">
+      <label for="">Ime</label>
+      <input #name="ngModel" name="name" [(ngModel)]="shipping.name" type="text" class="form-control" required>
+      <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+        <div *ngIf="name.errors.required">Neophodno je uneti ime.</div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="">Telefon</label>
+      <input #mobileNumber="ngModel" name="mobileNumber" [(ngModel)]="shipping.mobileNumber" [pattern]="mobNumberPattern" type="text" class="form-control" placeholder="Broj telefona, npr +381-12345678 / 0612345678" required>
+      <div class="alert alert-danger" *ngIf="mobileNumber.touched && mobileNumber.invalid" >
+        <div *ngIf="mobileNumber.errors.required">Neophodno je uneti broj telefona.</div>
+        <div *ngIf="mobileNumber.errors.pattern">  Broj telefona nije pravilno unet.  </div>   
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="">Grad</label>
+      <input #city="ngModel" name="city" [(ngModel)]="shipping.city" type="text" class="form-control" placeholder="Ime mesta, npr. Beograd" required>
+      <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+        <div *ngIf="city.errors.required">Neophodno je uneti ime mesta.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="">Adresa</label>
+      <input autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search (keydown.enter)="$event.preventDefault()" #addressLine1="ngModel" name="addressLine1" [(ngModel)]="shipping.addressLine1" type="text" class="form-control" placeholder="Ime ulice - Broj, npr. Knez Mihajlova 7" required>
+      <div class="alert alert-danger" *ngIf="addressLine1.touched && addressLine1.invalid">
+        <div *ngIf="addressLine1.errors.required">Neophodno je uneti adresu.</div>
+      </div>
+
+      <div id="google-map">
+        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+          <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+            (dragEnd)="markerDragEnd($event)"></agm-marker>
+        </agm-map>
+      </div>
+      
+    
+      <h6>Vaša trenutna lokacija: {{address}}</h6>
+    </div>
+  
+    <button
+      [disabled]="!f.valid"
+      (click)="placeOrder()"
+      class="btn btn-primary">Naručite
+    </button>
+</form>

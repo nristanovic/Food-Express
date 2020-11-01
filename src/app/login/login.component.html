@@ -1,0 +1,60 @@
+<div class="container pt-3">
+  <div class="row justify-content-sm-center">
+    <div class="col-sm-10 col-md-6">
+      <div class="card border-info">
+        <div class="card-header">Prijava</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img src="https://placeimg.com/128/128/nature">
+            </div>
+            <div class="col-md-8">
+              <form class="form" [formGroup]="loginForm">
+                <input type="email" class="form-control mb-2" placeholder="e-mail adresa" formControlName="email">
+                <input type="password" class="form-control mb-2" placeholder="lozinka" formControlName="password">
+                <button class="btn btn-lg btn-primary btn-block mb-1" (click)="login()">Prijavi se</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="text-center"><a routerLink="/password-reset">Zaboravili ste lozinku?</a></div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-sm-6">
+              <button routerLink="/register" class="btn btn-sm btn-warning">Napravite novi nalog</button>
+            </div>
+            <div class="col-sm-6">
+              <button (click)="loginWithGoogle()" class="btn btn-sm btn-warning">Prijavi se preko Google</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <form #f="ngForm"  (ngSubmit) = "login(user.email, user.password)"> 
+  <div class="form-group">
+    <label for="">Email</label>
+    <input #email="ngModel" email="email"  id="email" ngModel type="text" class="form-control" required>
+    <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+      <div *ngIf="email.errors.required">Neophodno je uneti ime.</div>
+    </div>
+  </div>
+    
+ 
+  
+  <div class="form-group">
+    <label for="">Password</label>
+    <input #password="ngModel" name="password" ngModel id="password" type="password" class="form-control" placeholder="Password" required>
+    <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+      <div *ngIf="password.errors.required">Neophodno je uneti ime mesta.</div>
+    </div>
+  </div>
+
+  <button
+    [disabled]="!f.valid"
+    
+    class="btn btn-primary ngSubmit">Prijavi se
+  </button>
+</form> -->

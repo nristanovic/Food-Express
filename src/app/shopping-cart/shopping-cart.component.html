@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="card" *ngIf="cart$ | async as cart" style="width: 100%; border: floralwhite;">
+        <div class="card-head">
+            <h1 class="text-center">Vaša Korpa</h1>
+        </div>
+        <div class="card-body">
+            <p>
+                Imate {{ cart.totalItemsCount }} proizvoda u vašoj korpi.
+                <button *ngIf="cart.items.length" (click)="clearCart()" class="float-right btn btn-light btn-sm">
+                    Obriši korpu
+                </button>
+            </p>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Proizvod</th>
+                    <th class="text-center" style="width: 230px">Količina</th>
+                    <th class="text-right" style="width: 200px">Cena</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of cart.items">
+                    <td>
+                        <div [style.backgroundImage]="'url(' + item.imageUrl + ')'" class="thumbnail"></div>
+                    </td>
+                    <td>{{ item.title }}</td>
+                    <td>
+                        <product-quantity [product]="item" [shopping-cart]="cart"></product-quantity>
+                    </td>
+                    <td class="text-right">
+                        {{ item.totalPrice | currency:'RSD ' }}
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Ukupno</th>
+                    <th></th>
+                    <th></th>
+                    <th class="text-right">{{ cart.totalPrice | currency:'RSD ' }}</th>
+                </tr>
+                <tr>
+                    <th colspan="4" class="text-center">
+                        <a *ngIf="cart.items.length" routerLink="/check-out"
+                            class="btn btn-primary btn-lg">Nastavite</a>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
